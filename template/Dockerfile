@@ -1,1 +1,1 @@
-FROM docker4gis/angular:v0.0.1
+FROM docker4gis/angular:v0.0.2
