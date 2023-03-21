@@ -17,6 +17,8 @@ RUN rm -rf /wwwroot
 ONBUILD ARG build_dir
 ONBUILD COPY --from=builder ${build_dir} /wwwroot
 
+# Overwrite serve's templates.
+RUN rm -rf /template/
 # Extension template, as required by `dg component`.
 COPY template /template/
 # Make this an extensible base component; see
