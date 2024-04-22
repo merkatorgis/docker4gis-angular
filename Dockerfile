@@ -1,4 +1,4 @@
-FROM docker4gis/serve:latest
+FROM docker4gis/serve:v0.0.9
 ENV SINGLE=true
 
 # This may come in handy.
