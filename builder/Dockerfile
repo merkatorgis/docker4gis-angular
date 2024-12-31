@@ -1,4 +1,4 @@
-FROM node:22.12.0-alpine3.21
+FROM node:22.12.0-bookworm
 
 # The source directory is given as a build argument.
 ONBUILD ARG SRC
@@ -16,4 +16,8 @@ ONBUILD RUN npm run build
 
 # Make /build contain the build artefacts that were written to the first
 # "outputPath" entry in the angular.json file.
-ONBUILD RUN mv "$(sed -rn 's/.*"outputPath": "(.*)".*/\1/p' angular.json | head -n 1)" /build
+ONBUILD RUN \
+    projects="require('./angular.json').projects"; \
+    project="Object.values($projects)[0]"; \
+    outputPath="$project.architect.build.options.outputPath"; \
+    mv "$(node --print "$outputPath")" /build
