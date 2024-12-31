@@ -1,5 +1,5 @@
 # Writes /build.
-FROM docker4gis/angular-builder:v0.0.17
+FROM docker4gis/angular-builder:v0.0.16
 
 # Serves /wwwroot.
 FROM docker4gis/angular:v0.0.16
