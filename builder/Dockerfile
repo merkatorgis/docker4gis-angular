@@ -14,10 +14,7 @@ ONBUILD RUN npm install
 ONBUILD COPY $SRC .
 ONBUILD RUN npm run build
 
-# Make /build contain the build artefacts that were written to the first
-# "outputPath" entry in the angular.json file.
-ONBUILD RUN \
-    projects="require('./angular.json').projects"; \
-    project="Object.values($projects)[0]"; \
-    outputPath="$project.architect.build.options.outputPath"; \
-    mv "$(node --print "$outputPath")" /build
+# Write the build output to the destination directory.
+COPY write_build.sh .
+ENV BUILD_DESTINATION=/build
+ONBUILD RUN ./write_build.sh
